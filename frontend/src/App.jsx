@@ -2,6 +2,8 @@ import { useState } from "react"
 import EvaluateTab from "./components/EvaluateTab"
 import VerifyTab from "./components/VerifyTab"
 import "./index.css"
+import ScoreBar from "./components/ScoreBar"
+import TierBadge from "./components/TierBadge"
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("evaluate")
@@ -40,7 +42,8 @@ export default function App() {
         {activeTab === "evaluate" && <EvaluateTab />}
         {activeTab === "verify" && <VerifyTab />}
       </main>
-
+  
     </div>
+    
   )
 }
