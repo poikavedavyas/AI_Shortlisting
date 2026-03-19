@@ -1,9 +1,9 @@
 # 🤖 AI Resume Shortlisting & Interview Assistant
 
-![Python](https://img.shields.io/badge/Python-3.12-blue)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.135-green)
-![Groq](https://img.shields.io/badge/Groq-LLaMA3.3_70B-orange)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+![Python]
+![FastAPI]
+![Groq]
+
 
 An intelligent AI-powered system that automates resume evaluation by comparing candidates against job descriptions, verifying public claims, and providing detailed scoring with explainability.
 
@@ -366,6 +366,16 @@ Redis cache for:
 → Groq paid: ~$10.62/day
 → very affordable
 ```
+
+---
+
+## 🚀 Future Improvements
+
+- **Option C** → Interview question generator based on candidate tier
+- **PostgreSQL** → Store candidate history and track over time
+- **React Frontend** → Visual dashboard for recruiters
+- **Batch Processing** → Evaluate multiple resumes at once
+- **ATS Integration** → Connect with existing HR systems
 
 ---
 
