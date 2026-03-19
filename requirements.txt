@@ -1,6 +1,7 @@
 fastapi
 uvicorn
 anthropic
+groq
 pydantic
 python-dotenv
 pymupdf
