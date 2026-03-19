@@ -379,3 +379,8 @@ Redis cache for:
 
 ---
 
+## 👨‍💻 Author
+
+Built as part of AI Backend Engineering Assessment
+— Vedavyas Poika
+
