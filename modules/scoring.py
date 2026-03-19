@@ -110,13 +110,25 @@ Return the JSON evaluation now.
         response_text = response.choices[0].message.content
         log(f"Raw response received — {len(response_text)} characters")
 
-        # Clean response
+        
         clean_response = response_text.strip()
-        if clean_response.startswith("```"):
+
+        if "```json" in clean_response:
+            clean_response = clean_response.split("```json")[1]
+            clean_response = clean_response.split("```")[0]
+        elif "```" in clean_response:
             clean_response = clean_response.split("```")[1]
-            if clean_response.startswith("json"):
-                clean_response = clean_response[4:]
+
         clean_response = clean_response.strip()
+
+        start_index = clean_response.find("{")
+        end_index = clean_response.rfind("}") + 1
+
+        if start_index == -1 or end_index == 0:
+            log("ERROR: No JSON object found in response")
+            return {}
+
+        clean_response = clean_response[start_index:end_index]
 
         # Parse JSON
         result = json.loads(clean_response)
