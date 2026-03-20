@@ -6,6 +6,7 @@ export default function VerifyTab() {
   //State Variables
   const [githubUrl, setGithubUrl] = useState("")
   const [linkedinUrl, setLinkedinUrl] = useState("")
+  const [leetcodeUrl, setLeetcodeUrl] = useState("")
   const [claims, setClaims] = useState("")
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState(null)
@@ -34,7 +35,8 @@ export default function VerifyTab() {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/verify`, {
         github_url: githubUrl,
         linkedin_url: linkedinUrl,
-        claims: claims
+        claims: claims,
+        leetcode_url: leetcodeUrl
       })
 
       //store result
@@ -91,6 +93,28 @@ export default function VerifyTab() {
           placeholder="https://linkedin.com/in/username"
           value={linkedinUrl}
           onChange={(e) => setLinkedinUrl(e.target.value)}
+        />
+      </div>
+
+      {/* LeetCode URL */}
+      <div className="form-group">
+        <label className="form-label">
+          LeetCode URL
+          <span style={{
+            color: "#94a3b8",
+            fontWeight: 400,
+            fontSize: "0.8rem",
+            marginLeft: 8
+          }}>
+            optional
+          </span>
+        </label>
+        <input
+          type="text"
+          className="form-input"
+          placeholder="https://leetcode.com/username  (Optional)"
+          value={leetcodeUrl}
+          onChange={(e) => setLeetcodeUrl(e.target.value)}
         />
       </div>
 

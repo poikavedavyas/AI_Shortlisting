@@ -86,11 +86,47 @@ def fetch_github_data(github_url: str) -> dict:
         log(f"ERROR: GitHub fetch failed — {str(e)}")
         return {"error": str(e)}
 
+def fetch_leetcode_data(leetcode_url: str) -> dict:
+    """
+    Takes a LeetCode profile URL.
+    Fetches real problem solving stats.
+    Returns dict with solved counts.
+    """
+    try:
+        if not leetcode_url or not leetcode_url.strip():
+            return {}
+
+        username = leetcode_url.strip().rstrip("/").split("/")[-1]
+        log(f"Fetching LeetCode data for: {username}")
+
+        url = f"https://leetcode-stats-api.herokuapp.com/{username}"
+        response = requests.get(url, timeout=10)
+
+        if response.status_code == 200:
+            data = response.json()
+            result = {
+                "username": username,
+                "totalSolved": data.get("totalSolved", 0),
+                "easySolved": data.get("easySolved", 0),
+                "mediumSolved": data.get("mediumSolved", 0),
+                "hardSolved": data.get("hardSolved", 0),
+                "ranking": data.get("ranking", "unknown")
+            }
+            log(f"LeetCode data fetched — total solved: {result['totalSolved']}")
+            return result
+        else:
+            log(f"LeetCode profile not found — {username}")
+            return {"username": username, "note": "profile not found"}
+
+    except Exception as e:
+        log(f"ERROR: LeetCode fetch failed — {str(e)}")
+        return {}
 
 def verify_candidate(
     github_url: str,
     linkedin_url: str,
-    claims: str
+    claims: str,
+    leetcode_url: str = ""
 ) -> dict:
     """
     Takes GitHub URL, LinkedIn URL and candidate claims.
@@ -103,6 +139,10 @@ def verify_candidate(
 
         # Step 1 — fetch real GitHub data
         github_data = fetch_github_data(github_url)
+
+        leetcode_data = {}
+        if leetcode_url.strip():
+            leetcode_data = fetch_leetcode_data(leetcode_url)
 
         # Step 2 — build system prompt
         system_prompt = """
@@ -170,6 +210,17 @@ Return exactly this structure:
 """
 
         # Step 3 — build user message with real data
+        leetcode_section = ""
+        if leetcode_data and "totalSolved" in leetcode_data:
+            leetcode_section = f"""
+        LEETCODE PROFILE DATA (real data fetched):
+        Username: {leetcode_data.get('username', 'unknown')}
+        Total Problems Solved: {leetcode_data.get('totalSolved', 0)}
+        Easy: {leetcode_data.get('easySolved', 0)}
+        Medium: {leetcode_data.get('mediumSolved', 0)}
+        Hard: {leetcode_data.get('hardSolved', 0)}
+        Ranking: {leetcode_data.get('ranking', 'unknown')}
+        """
         user_message = f"""
 Please verify this candidate's claims.
 
@@ -181,17 +232,15 @@ Followers: {github_data.get('followers', 0)}
 Account Created: {github_data.get('account_created', 'Unknown')}
 Total Stars: {github_data.get('total_stars', 0)}
 Top Languages: {github_data.get('top_languages', [])}
-Company: {github_data.get('company', 'Not provided')}
-Location: {github_data.get('location', 'Not provided')}
 Bio: {github_data.get('bio', 'Not provided')}
-
+{leetcode_section}
 LINKEDIN URL:
 {linkedin_url}
 
 CANDIDATE CLAIMS:
 {claims}
 
-Analyze the claims against the GitHub data.
+Analyze the claims against the GitHub data and LeetCode data if available.
 Return the JSON verification report now.
 """
 
