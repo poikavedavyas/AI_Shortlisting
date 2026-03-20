@@ -91,7 +91,7 @@ FastAPI Backend (Render)
 │  PDF bytes → plain text              │
 │                                      │
 │  scoring.py                          │
-│  resume + JD → Groq AI → 4 scores   │
+│  resume + JD → Groq AI → 4 scores    │
 │                                      │
 │  verification.py                     │
 │  GitHub API + claims → Groq → report │
