@@ -30,8 +30,6 @@ class VerifyRequest(BaseModel):
     github_url: str
     linkedin_url: str
     claims: str
-    leetcode_url: str = ""
-    
 
 
 #Endpoint 1 — Health Check
@@ -126,11 +124,9 @@ def verify(request: VerifyRequest):
     result = verify_candidate(
         github_url=request.github_url,
         linkedin_url=request.linkedin_url,
-        claims=request.claims,
-        leetcode_url=request.leetcode_url
+        claims=request.claims
     )
 
-    
     # check if verification worked
     if not result:
         log("ERROR: Verification failed")
