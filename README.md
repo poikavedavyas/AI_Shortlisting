@@ -361,6 +361,6 @@ Open browser at `http://localhost:3000`
 ## 👨‍💻 Author
 
 Built as part of AI Backend Engineering Assignment
-— Vedavyas Poika
+— Vedavyas S. Poika
 
 GitHub Repository: https://github.com/poikavedavyas/AI_Shortlisting
