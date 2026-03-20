@@ -45,7 +45,7 @@ export default function EvaluateTab() {
 
       // call FastAPI backend
       const response = await axios.post(
-        "/api/evaluate",
+        `${import.meta.env.VITE_API_URL}/evaluate`,
         formData,
         {
           headers: {

@@ -31,7 +31,7 @@ export default function VerifyTab() {
 
     try {
       //call FastAPI backend
-      const response = await axios.post("/api/verify", {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/verify`, {
         github_url: githubUrl,
         linkedin_url: linkedinUrl,
         claims: claims
