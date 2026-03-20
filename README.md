@@ -130,50 +130,12 @@ Step 6 → React displays authenticity report
 
 ### Design Decisions
 
-**Why Groq over OpenAI:**
+**Key design decisions:**
+- **Groq LLaMA 3.3 70B** — free tier with 14400 calls/day, fast inference, reliable JSON output
+- **FastAPI** — async support handles concurrent requests, built in validation and auto documentation
+- **PyMuPDF** — accurate text extraction from any PDF format
+- **In-memory state** — sufficient for this scope, database is a future improvement
 ```
-→ free tier with generous limits
-→ faster inference speed
-→ reliable structured JSON output
-→ no credit card needed
-→ 14400 free API calls per day
-```
-
-**Why FastAPI over Flask or Django:**
-```
-→ async support for concurrent requests
-→ automatic API documentation
-→ built in Pydantic validation
-→ fastest Python web framework
-→ industry standard for AI backends
-```
-
-**Why in-memory over database:**
-```
-→ assignment scope does not require persistence
-→ zero setup complexity
-→ stateless API is cleaner architecture
-→ database listed as future improvement
-```
-
-**Why PyMuPDF over pdfplumber:**
-```
-→ fastest PDF library in Python
-→ handles all PDF formats reliably
-→ extracts text accurately
-→ lightweight dependency
-```
-
-**Prompt Engineering Strategy:**
-```
-→ system prompt defines role and scoring rules
-→ user message contains resume + JD text
-→ exact JSON structure enforced in prompt
-→ temperature = 0 for consistent output
-→ JSON cleaning handles edge cases
-→ start and end index extraction prevents crashes
-```
-
 ---
 
 ## ✨ Features
@@ -259,118 +221,6 @@ AI_Shortlisting/
 | GET | /health | Check if server is running |
 | POST | /evaluate | Score resume against job description |
 | POST | /verify | Verify candidate claims against GitHub |
-
----
-
-### GET /health
-
-Check server is running before testing other endpoints.
-
-**Response:**
-```json
-{
-    "status": "ok",
-    "message": "AI Shortlisting API is running"
-}
-```
-
----
-
-### POST /evaluate
-
-Evaluates a resume PDF against a job description using Groq AI.
-
-**Input:**
-
-| Field | Type | Description |
-|---|---|---|
-| file | PDF upload | Candidate resume file |
-| jd | string | Job description text |
-
-**Response:**
-```json
-{
-    "scores": {
-        "exactMatch": 72,
-        "semanticSimilarity": 80,
-        "achievements": 75,
-        "ownership": 70,
-        "overall": 74
-    },
-    "tier": "B",
-    "summary": "Strong backend engineer with solid Python and Kafka experience",
-    "strengths": [
-        "Kafka matches event streaming requirement",
-        "40% latency reduction shows measurable impact",
-        "AWS experience matches JD requirements"
-    ],
-    "gaps": [
-        "No gRPC experience mentioned",
-        "No FinTech domain knowledge"
-    ],
-    "exactMatchExplanation": "7 of 9 required skills matched directly",
-    "semanticExplanation": "AWS Kinesis recognized as Kafka equivalent",
-    "achievementsExplanation": "40% latency reduction shows strong impact",
-    "ownershipExplanation": "Led migration shows clear ownership",
-    "recommendation": "Advance to technical screen"
-}
-```
-
----
-
-### POST /verify
-
-Verifies manually entered candidate claims against real GitHub data.
-
-**Input:**
-```json
-{
-    "github_url": "https://github.com/username",
-    "linkedin_url": "https://linkedin.com/in/username",
-    "claims": "I have 3 years Python experience. I use Git for all projects. I have built REST APIs using FastAPI."
-}
-```
-
-**Response:**
-```json
-{
-    "overallAuthenticity": 85,
-    "githubSignals": {
-        "score": 88,
-        "findings": [
-            "Python is top language — matches claimed expertise",
-            "Account age is 3 years — consistent with experience claim"
-        ],
-        "flags": []
-    },
-    "claimVerification": [
-        {
-            "claim": "I have 3 years Python experience",
-            "plausibility": "High",
-            "reasoning": "Multiple Python repos found. Account created 3 years ago.",
-            "verificationTip": "Check commit history and repo quality for depth"
-        },
-        {
-            "claim": "I use Git for all projects",
-            "plausibility": "High",
-            "reasoning": "Active GitHub profile with regular commits",
-            "verificationTip": "Check contribution graph for consistency"
-        },
-        {
-            "claim": "I have built REST APIs using FastAPI",
-            "plausibility": "Medium",
-            "reasoning": "Python repos exist but no FastAPI specific repo found",
-            "verificationTip": "Ask candidate to share a specific API project link"
-        }
-    ],
-    "greenFlags": [
-        "Active GitHub profile with recent activity",
-        "Languages match claimed technical skills"
-    ],
-    "redFlags": [],
-    "verdict": "Candidate appears largely authentic. Python experience is well supported by GitHub data. REST API claim needs further verification."
-}
-```
 
 ---
 
@@ -528,7 +378,7 @@ npm install
 npm run dev
 ```
 
-Open browser at `http://localhost:5173`
+Open browser at `http://localhost:3000`
 
 ---
 
