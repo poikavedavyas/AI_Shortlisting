@@ -42,10 +42,7 @@ The system understands semantic equivalents — a candidate with **AWS Kinesis**
 
 ## 🌐 Live Demo
 
-| Service | URL |
-|---|---|
-| Frontend UI | https://ai-shortlisting.vercel.app |
-| Backend API | https://ai-shortlisting.onrender.com |
+🔗 https://ai-shortlisting.vercel.app
 
 > Note: Backend runs on Render free tier. First request may take 30-50 seconds to wake up. Subsequent requests will be instant.
 
@@ -135,7 +132,7 @@ Step 6 → React displays authenticity report
 - **FastAPI** — async support handles concurrent requests, built in validation and auto documentation
 - **PyMuPDF** — accurate text extraction from any PDF format
 - **In-memory state** — sufficient for this scope, database is a future improvement
-```
+
 ---
 
 ## ✨ Features
