@@ -297,32 +297,15 @@ Every score includes:
 ---
 
 ## 📈 Scalability
-
-### Current Capacity
-```
-→ handles 10000+ resumes per day comfortably
-→ Groq free tier supports 14400 API calls per day
-→ async FastAPI handles multiple concurrent requests
-→ no database overhead keeps response times fast
 ```
 
-### Production Scaling Plan
+Current system handles 10,000+ resumes/day on Groq free tier (14,400 API calls/day).
 
-| Level | Solution | Impact |
-|---|---|---|
-| 1 | Multiple uvicorn workers | 4x throughput instantly |
-| 2 | Redis async job queue | No user waiting time |
-| 3 | Nginx load balancer | Unlimited horizontal scale |
-| 4 | Redis response caching | 40% fewer Groq API calls |
-| 5 | PostgreSQL storage | Full candidate history |
-
-### Cost at Scale
-```
-10000 resumes per day:
-→ approximately 1800 tokens per evaluation
-→ 18 million tokens per day total
-→ Groq paid tier approximately $10 per day
-→ very affordable at enterprise scale
+To scale further:
+- Multiple uvicorn workers → parallel processing
+- Redis queue → async background jobs
+- Load balancer → horizontal scaling
+- PostgreSQL → persistent candidate storage
 ```
 
 ---
@@ -340,9 +323,6 @@ PostgreSQL for storing candidate history and evaluation results. Redis for cachi
 
 **Batch Processing**
 Process hundreds of resumes simultaneously using async Redis workers and job queues with real time progress tracking.
-
-**ATS Integration**
-Connect with existing HR systems like Greenhouse, Lever, or Workday for seamless workflow integration without changing recruiter tools.
 
 ---
 
