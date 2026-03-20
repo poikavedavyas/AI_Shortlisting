@@ -297,7 +297,6 @@ Every score includes:
 ---
 
 ## 📈 Scalability
-```
 
 Current system handles 10,000+ resumes/day on Groq free tier (14,400 API calls/day).
 
@@ -306,7 +305,7 @@ To scale further:
 - Redis queue → async background jobs
 - Load balancer → horizontal scaling
 - PostgreSQL → persistent candidate storage
-```
+
 
 ---
 
