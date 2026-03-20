@@ -7,17 +7,17 @@
 
 /* ── Variables ──────────────────────────── */
 :root {
-  --primary: #6366f1;
-  --primary-dark: #4f46e5;
-  --success: #22c55e;
-  --warning: #f59e0b;
-  --danger: #ef4444;
-  --bg: #0f172a;
-  --bg-card: #1e293b;
-  --bg-input: #0f172a;
-  --border: #334155;
-  --text: #f1f5f9;
-  --text-muted: #94a3b8;
+  --primary: #3182CE;
+  --primary-dark: #2B6CB0;
+  --success: #38A169;
+  --warning: #D69E2E;
+  --danger: #E53E3E;
+  --bg: #EBF8FF;
+  --bg-card: #ffffff;
+  --bg-input: #F7FAFC;
+  --border: #BEE3F8;
+  --text: #1A365D;
+  --text-muted: #4A5568;
   --radius: 12px;
 }
 
@@ -25,7 +25,7 @@
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   min-height: 100vh;
 }
 
@@ -40,14 +40,13 @@ body {
 .header {
   text-align: center;
   margin-bottom: 2rem;
+  
 }
 
 .header-title {
   font-size: 2rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-weight: 10000;
+  color: #1A365D;
   margin-bottom: 0.5rem;
 }
 
@@ -88,10 +87,10 @@ body {
 
 /* ── Main Content ───────────────────────── */
 .main-content {
-  background: var(--bg-card);
+  background: #CEEAFA;
   border-radius: var(--radius);
   padding: 2rem;
-  border: 1px solid var(--border);
+  border: 1px solid #90CDF4;
 }
 
 /* ── Cards ──────────────────────────────── */

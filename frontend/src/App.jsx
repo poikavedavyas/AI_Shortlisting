@@ -15,9 +15,19 @@ export default function App() {
         <h1 className="header-title">
           AI Resume Shortlisting System
         </h1>
-        <p className="header-subtitle">
-          Powered by Groq LLaMA 3.3 70B
-        </p>
+        <div style={{ display: "flex", alignItems: "center", gap: "16px", justifyContent: "center" }}>
+          <a
+            href="https://github.com/poikavedavyas/AI_Shortlisting"
+            target="_blank"
+            rel="noreferrer"
+            style={{ textDecoration: "none", color: "#3182CE", fontSize: "0.9rem" }}
+          >
+            GitHub →
+          </a>
+          <span style={{ color: "#4A5568", fontSize: "0.9rem" }}>
+            Developed by Vedavyas S. Poika
+          </span>
+        </div>
       </header>
 
       {/* Tab Navigation */}
